@@ -383,6 +383,13 @@ class ComposerStaticInit05b327acaa6263a770d0aedf3e8dc73e
                 0 => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src',
             ),
         ),
+        'H' => 
+        array (
+            'HTTP_Request2' => 
+            array (
+                0 => __DIR__ . '/..' . '/pear/http_request2',
+            ),
+        ),
     );
 
     public static $classMap = array (
@@ -509,6 +516,8 @@ class ComposerStaticInit05b327acaa6263a770d0aedf3e8dc73e
         'Maatwebsite\\Excel\\Writers\\CellWriter' => __DIR__ . '/..' . '/maatwebsite/excel/src/Maatwebsite/Excel/Writers/CellWriter.php',
         'Maatwebsite\\Excel\\Writers\\LaravelExcelWriter' => __DIR__ . '/..' . '/maatwebsite/excel/src/Maatwebsite/Excel/Writers/LaravelExcelWriter.php',
         'Messages' => __DIR__ . '/../..' . '/database/migrations/2017_05_09_191408_messages.php',
+        'Net_URL2' => __DIR__ . '/..' . '/pear/net_url2/Net/URL2.php',
+        'PEAR_Exception' => __DIR__ . '/..' . '/pear/pear_exception/PEAR/Exception.php',
         'PHPUnit\\Framework\\Assert' => __DIR__ . '/..' . '/phpunit/phpunit/src/ForwardCompatibility/Assert.php',
         'PHPUnit\\Framework\\AssertionFailedError' => __DIR__ . '/..' . '/phpunit/phpunit/src/ForwardCompatibility/AssertionFailedError.php',
         'PHPUnit\\Framework\\BaseTestListener' => __DIR__ . '/..' . '/phpunit/phpunit/src/ForwardCompatibility/BaseTestListener.php',

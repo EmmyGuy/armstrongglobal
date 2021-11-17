@@ -99,5 +99,9 @@ Route::post('save-application', ['as' => 'save-application', 'uses' => 'HomeCont
 
 Route::get('print-application/{id}', 'HomeController@showPrintOutPage');
 
+Route::get('show-validate', 'PaymentController@showPaymentValidation');
+
+Route::post('validation', ['as' => 'send-validation', 'uses' => 'PaymentController@confirmPay']);
+
 // });
 ?>

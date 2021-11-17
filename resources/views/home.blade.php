@@ -17,7 +17,8 @@
             @if (session('role') == "User")
                 <div class="">
                     <div class="row">
-                        
+                    @if($projects != null)
+
                             <div class="col-lg-12">
                                 <table id="projects" name="projects" class="table table-bordered table-striped">
                                     <thead>
@@ -32,17 +33,18 @@
 
                                     <tbody>
                                     <?php $sn=1; ?>
-                                    @foreach($projects as $project)
-                                        <tr class="item{{$project->id}}">
-                                            <td>{{$sn++}}</td>
-                                            <td>{{$project->title}}</td>
-                                            <td><span>&#8358;</span>{{$project->price}}</td>
-                                            <!-- <td>{{$project->created_at}}</td> -->
-                                            <td>
-                                                <a href="#myModal" class="open-myModal btn btn-primary btn-sm" data-toggle="modal" data-title="{{$project->title }}" data-abstract="{{$project->abstract}}" data-id="{{$project->id}}" data-price="{{$project->price}}">Summary</a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                        @foreach($projects as $project)
+                                            <tr class="item{{$project->id}}">
+                                                <td>{{$sn++}}</td>
+                                                <td>{{$project->title}}</td>
+                                                <td><span>&#8358;</span>{{$project->price}}</td>
+                                                <!-- <td>{{$project->created_at}}</td> -->
+                                                <td>
+                                                    <a href="#myModal" class="open-myModal btn btn-primary btn-sm" data-toggle="modal" data-title="{{$project->title }}" data-abstract="{{$project->abstract}}" data-id="{{$project->id}}" data-price="{{$project->price}}">Summary</a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                    @endif
                                     </tbody>
                                 </table>
                             </div>

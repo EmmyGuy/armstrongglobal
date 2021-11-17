@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers;
 
+// require_once 'HTTP/Request2.php';
+
 use App\Project;
 use App\Message;
 use App\Transaction;
 
+
 use Illuminate\Http\Request;
+use Illuminate\Http\Client;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
 use Paystack;
 
 class PaymentController extends Controller
@@ -79,5 +84,81 @@ class PaymentController extends Controller
             // Error
             exit( 'Error, please check the email you supplied for download link!' );
         }
+    }
+
+    public function showPaymentValidation()
+    {
+        $projects = null;
+        return view('admin.paymentvalidation', compact('projects'));
+    }
+
+
+    public function confirmPay(Request $request)
+    {
+        // dd($request);
+        // $request = new HTTP_Request2();
+        // $request->setUrl('http://www.remitademo.net/remita/ecomm/{{merchantId}}/{{rrr}}/{{apiHash}}/status.reg');
+        // $request->setMethod(HTTP_Request2::METHOD_GET);
+        // $request->setConfig(array(
+        // 'follow_redirects' => TRUE
+        // ));
+        // $request->setHeader(array(
+        // 'Content-Type' => 'application/json',
+        // 'Authorization' => 'remitaConsumerKey={{merchantId}},remitaConsumerToken={{apiHash}}'
+        // ));
+        // try {
+        // $response = $request->send();
+        // if ($response->getStatus() == 200) {
+        //     echo $response->getBody();
+        // }
+        // else {
+        //     echo 'Unexpected HTTP status: ' . $response->getStatus() . ' ' .
+        //     $response->getReasonPhrase();
+        // }
+        // }
+        // catch(HTTP_Request2_Exception $e) {
+        // echo 'Error: ' . $e->getMessage();
+        // }
+        $apiKey = "142368";
+        $merchantId = "540814763";
+        $rrr = $request->ref;
+        $email = $request->email;
+        $apiHash = hash('sha256', $rrr + $apiKey + 350576529261);
+        // $client = new http\Client;
+        // $request = new http\Client\Request;
+        // $request->setRequestUrl('http://www.remitademo.net/remita/ecomm/{{$merchantId}}/{{$rrr}}/{{$apiHash}}/status.reg');
+        // $request->setRequestMethod('GET');
+        // $request->setOptions(array());
+        // $request->setHeaders(array(
+        // 'Content-Type' => 'application/json',
+        // 'Authorization' => 'remitaConsumerKey={{$merchantId}},remitaConsumerToken={{$apiHash}}'
+        // ));
+        // $client->enqueue($request)->send();
+        // $response = $client->getResponse();
+        // dd($response->getBody());
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => 'http://www.remitademo.net/remita/ecomm/{{'.$merchantId.'}}/{{'.$rrr.'}}/{{'.$apiHash.'}}/status.reg',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'GET',
+        CURLOPT_HTTPHEADER => array(
+            'Content-Type: application/json',
+            'Authorization: remitaConsumerKey={{'.$merchantId.'}},remitaConsumerToken={{'.$apiHash.'}}'
+        ),
+        ));
+        dd($curl);
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        dd($response);
+
+        return view();
     }
 }
